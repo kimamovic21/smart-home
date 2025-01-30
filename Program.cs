@@ -1,2 +1,13 @@
-﻿// See https://aka.ms/new-console-template for more information
-Console.WriteLine("Hello, World!");
+﻿using System;
+
+namespace SmartHomeApp
+{
+    class Program
+    {
+        static void Main()
+        {
+            SmartHome smartHome = new SmartHome();
+            smartHome.WelcomeMessage();
+        }
+    }
+}
