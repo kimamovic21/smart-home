@@ -2,25 +2,36 @@
 
 namespace SmartHomeApp
 {
-    internal class SmartTV
+    internal class SmartTV : SmartHome
     {
-        private bool isSmartTVOn;
+        private bool isSmartTVOn = false;
 
-        public void TurnOnSmartTV()
+        public SmartTV(bool isSmartTVOn)
         {
-            isSmartTVOn = true;
+            IsSmartTVOn = isSmartTVOn;
+        }
+
+        public SmartTV()
+        {
+        }
+
+        public bool IsSmartTVOn { get => isSmartTVOn; set => isSmartTVOn = value; }
+
+        public override void TurnOn()
+        {
+            IsSmartTVOn = true;
             Console.WriteLine("\nTurning on the smart TV...");
             Console.WriteLine("Smart TV is now ON!");
         }
 
-        public void TurnOffSmartTV()
+        public override void TurnOff()
         {
-            isSmartTVOn = false;
+            IsSmartTVOn = false;
             Console.WriteLine("\nTurning off the smart TV...");
             Console.WriteLine("Smart TV is now OFF!");
         }
 
-        public void GetSmartTVStatus()
+        public override void GetStatus()
         {
             string smartTVStatus = isSmartTVOn ? "ON" : "OFF";
             Console.WriteLine("\nChecking smart TV status...");

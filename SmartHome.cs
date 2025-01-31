@@ -2,11 +2,10 @@
 
 namespace SmartHomeApp
 {
-    public class SmartHome
+    public abstract class SmartHome
     {
-        public void WelcomeMessage()
-        {
-            Console.WriteLine("Welcome to Smart Home");
-        }
+            public abstract void TurnOn();
+            public abstract void TurnOff();
+            public abstract void GetStatus();
     }
 }

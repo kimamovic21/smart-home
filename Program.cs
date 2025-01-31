@@ -6,32 +6,31 @@ namespace SmartHomeApp
     {
         static void Main()
         {
-            SmartHome smartHome = new SmartHome();
             SmartAlarm smartAlarm = new SmartAlarm();
             SmartTV smartTV = new SmartTV();
             SmartHeating smartHeating = new SmartHeating();
 
-            smartHome.WelcomeMessage();
+            Console.WriteLine("Welcome to the Smart Home App!");
 
-            smartAlarm.TurnOffSmartAlarm();
-            smartAlarm.GetSmartAlarmStatus();
+            smartAlarm.TurnOff();
+            smartAlarm.GetStatus();
 
-            smartHeating.TurnOnSmartHeating();
+            smartHeating.TurnOn();
             smartHeating.SetTemperature(25);
-            smartHeating.GetSmartHeatingStatus();
+            smartHeating.GetStatus();
 
-            smartTV.TurnOnSmartTV();
-            smartTV.GetSmartTVStatus();
+            smartTV.TurnOn();
+            smartTV.GetStatus();
 
-            smartAlarm.TurnOnSmartAlarm();
-            smartAlarm.GetSmartAlarmStatus();
+            smartAlarm.TurnOn();
+            smartAlarm.GetStatus();
 
-            smartTV.TurnOffSmartTV();
-            smartTV.GetSmartTVStatus();
+            smartTV.TurnOff();
+            smartTV.GetStatus();
 
-            smartHeating.TurnOffSmartHeating();
+            smartHeating.TurnOff();
             smartHeating.SetTemperature(0);
-            smartHeating.GetSmartHeatingStatus();
+            smartHeating.GetStatus();
         }
     }
 }
