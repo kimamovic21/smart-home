@@ -10,14 +10,14 @@ namespace SmartHomeApp
         {
             isSmartAlarmOn = true;
             Console.WriteLine("\nTurning on the smart alarm...");
-            Console.WriteLine("Smart Alarm is now ON!");
+            Console.WriteLine("Smart alarm is now ON!");
         }
 
         public void TurnOffSmartAlarm()
         {
             isSmartAlarmOn = false;
             Console.WriteLine("\nTurning off the smart alarm...");
-            Console.WriteLine("Smart Alarm is now OFF!");
+            Console.WriteLine("Smart alarm is now OFF!");
         }
 
         public void GetSmartAlarmStatus()
