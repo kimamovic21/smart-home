@@ -7,21 +7,22 @@ namespace SmartHomeApp
         static void Main()
         {
             SmartHome smartHome = new SmartHome();
+            SmartAlarm smartAlarm = new SmartAlarm();
+            SmartTV smartTV = new SmartTV();
+
             smartHome.WelcomeMessage();
 
-            SmartAlarm alarm = new SmartAlarm();
+            smartAlarm.TurnOffSmartAlarm();
+            smartAlarm.GetSmartAlarmStatus();
 
-            Console.WriteLine("\nTurning on the alarm...");
-            alarm.TurnOnAlarm();
+            smartTV.TurnOnSmartTV();
+            smartTV.GetSmartTVStatus();
 
-            Console.WriteLine("\nChecking alarm status...");
-            alarm.GetAlarmStatus();
+            smartAlarm.TurnOnSmartAlarm();
+            smartAlarm.GetSmartAlarmStatus();
 
-            Console.WriteLine("\nTurning off the alarm...");
-            alarm.TurnOffAlarm();
-
-            Console.WriteLine("\nChecking alarm status again...");
-            alarm.GetAlarmStatus();
+            smartTV.TurnOffSmartTV();
+            smartTV.GetSmartTVStatus();
         }
     }
 }

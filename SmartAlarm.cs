@@ -1,25 +1,30 @@
-﻿namespace SmartHomeApp
+﻿using System;
+
+namespace SmartHomeApp
 {
     internal class SmartAlarm
     {
-        private bool isAlarmOn;
+        private bool isSmartAlarmOn;
 
-        public void TurnOnAlarm()
+        public void TurnOnSmartAlarm()
         {
-            isAlarmOn = true;
-            Console.WriteLine("Alarm is now ON!");
+            isSmartAlarmOn = true;
+            Console.WriteLine("\nTurning on the smart alarm...");
+            Console.WriteLine("Smart Alarm is now ON!");
         }
 
-        public void TurnOffAlarm()
+        public void TurnOffSmartAlarm()
         {
-            isAlarmOn = false;
-            Console.WriteLine("Alarm is now OFF!");
+            isSmartAlarmOn = false;
+            Console.WriteLine("\nTurning off the smart alarm...");
+            Console.WriteLine("Smart Alarm is now OFF!");
         }
 
-        public void GetAlarmStatus()
+        public void GetSmartAlarmStatus()
         {
-            string status = isAlarmOn ? "ON" : "OFF";
-            Console.WriteLine($"Current alarm status: {status}");
+            string smartAlarmStatus = isSmartAlarmOn ? "ON" : "OFF";
+            Console.WriteLine("\nChecking smart alarm status...");
+            Console.WriteLine($"Current smart alarm status: {smartAlarmStatus}");
         }
     }
 }
