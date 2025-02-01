@@ -6,9 +6,11 @@ namespace SmartHomeApp
     {
         private bool isSmartHeatingOn = false;
         private int temperature = 20; //Default temperature
+        private int requiredElectricity = 100;
 
         public bool IsSmartHeatingOn { get => isSmartHeatingOn; set => isSmartHeatingOn = value; }
         public int Temperature { get => temperature; set => temperature = value; }
+        public int RequiredElectricity { get => requiredElectricity; }
 
         public SmartHeating()
         {
@@ -25,6 +27,7 @@ namespace SmartHomeApp
             if (IsSmartHeatingOn == false)
             {
                 IsSmartHeatingOn = true;
+                ElectricityConsumption += RequiredElectricity;
                 Console.WriteLine("Turning on the smart heating...");
                 Console.WriteLine("Smart heating is now ON!");
                 this.GetStatus();
@@ -40,6 +43,7 @@ namespace SmartHomeApp
             if (IsSmartHeatingOn == true)
             {
                 IsSmartHeatingOn = false;
+                ElectricityConsumption -= RequiredElectricity;
                 Console.WriteLine("Turning off the smart heating...");
                 Console.WriteLine("Smart heating is now OFF!");
             }

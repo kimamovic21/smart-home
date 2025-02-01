@@ -5,6 +5,7 @@ namespace SmartHomeApp
     internal class SmartAlarm : SmartHome
     {
         private bool isSmartAlarmOn = false;
+        private int requiredElectricity = 30;
 
         public SmartAlarm(bool isSmartAlarmOn)
         {
@@ -16,6 +17,7 @@ namespace SmartHomeApp
         }
 
         public bool IsSmartAlarmOn { get => isSmartAlarmOn; set => isSmartAlarmOn = value; }
+        public int RequiredElectricity { get => requiredElectricity; }
 
         public override void TurnOn()
         {
@@ -26,6 +28,7 @@ namespace SmartHomeApp
             else
             {
                 isSmartAlarmOn = true;
+                ElectricityConsumption += requiredElectricity;
                 Console.WriteLine("Turning on the smart alarm...");
                 Console.WriteLine("Smart alarm is now ON!");
             }
@@ -36,6 +39,7 @@ namespace SmartHomeApp
             if (IsSmartAlarmOn == true)
             {
                 IsSmartAlarmOn = false;
+                ElectricityConsumption -= RequiredElectricity;
                 Console.WriteLine("Turning off the smart alarm...");
                 Console.WriteLine("Smart alarm is now OFF!");
             }

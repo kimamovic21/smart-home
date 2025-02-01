@@ -5,6 +5,7 @@ namespace SmartHomeApp
     internal class SmartTV : SmartHome
     {
         private bool isSmartTVOn = false;
+        private int requiredElectricity = 50;
 
         public SmartTV(bool isSmartTVOn)
         {
@@ -16,6 +17,7 @@ namespace SmartHomeApp
         }
 
         public bool IsSmartTVOn { get => isSmartTVOn; set => isSmartTVOn = value; }
+        public int RequiredElectricity { get => requiredElectricity; }
 
         public override void TurnOn()
         {
@@ -26,6 +28,7 @@ namespace SmartHomeApp
             else
             {
                 IsSmartTVOn = true;
+                ElectricityConsumption += RequiredElectricity;
                 Console.WriteLine("Turning on the smart TV...");
                 Console.WriteLine("Smart TV is now ON!");
             }
@@ -40,6 +43,7 @@ namespace SmartHomeApp
             else
             {
                 IsSmartTVOn = false;
+                ElectricityConsumption -= RequiredElectricity;
                 Console.WriteLine("Turning off the smart TV...");
                 Console.WriteLine("Smart TV is now OFF!");
             }

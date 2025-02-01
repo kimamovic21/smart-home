@@ -15,12 +15,18 @@ namespace SmartHomeApp
             Console.WriteLine("Smart heating id is: " + smartHeating.SmartDeviceId);
             while (true)
             {
+                int electricityConsumptionBySmartHome = smartHeating.GetElectricityConsumption();
                 Console.WriteLine("\nWelcome to the Smart Home App!");
                 Console.WriteLine("Choose an option");
                 Console.WriteLine("1. Change status of smart alarm");
                 Console.WriteLine("2. Change status of the smart TV");
                 Console.WriteLine("3. Change status of the smart heating");
                 Console.WriteLine("4. Exit");
+                Console.WriteLine("\nTotal electricity consumption is: " + electricityConsumptionBySmartHome+ "kWh");
+                if (electricityConsumptionBySmartHome > 100)
+                {
+                    Console.WriteLine("Warning! Electricity consumption is above 100kWh");
+                }
                 string? userInput = Console.ReadLine();
                 if (userInput == "1")
                 {
