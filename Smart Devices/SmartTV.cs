@@ -19,23 +19,38 @@ namespace SmartHomeApp
 
         public override void TurnOn()
         {
-            IsSmartTVOn = true;
-            Console.WriteLine("\nTurning on the smart TV...");
-            Console.WriteLine("Smart TV is now ON!");
+            if (IsSmartTVOn == true)
+            {
+                Console.WriteLine("Smart TV is already ON!");
+            }
+            else
+            {
+                IsSmartTVOn = true;
+                Console.WriteLine("Turning on the smart TV...");
+                Console.WriteLine("Smart TV is now ON!");
+            }
         }
 
         public override void TurnOff()
         {
-            IsSmartTVOn = false;
-            Console.WriteLine("\nTurning off the smart TV...");
-            Console.WriteLine("Smart TV is now OFF!");
+            if (IsSmartTVOn == false)
+            {
+                Console.WriteLine("Smart TV is already OFF!");
+            }
+            else
+            {
+                IsSmartTVOn = false;
+                Console.WriteLine("Turning off the smart TV...");
+                Console.WriteLine("Smart TV is now OFF!");
+            }
         }
 
-        public override void GetStatus()
+        public override bool GetStatus()
         {
             string smartTVStatus = isSmartTVOn ? "ON" : "OFF";
-            Console.WriteLine("\nChecking smart TV status...");
+            Console.WriteLine("Checking smart TV status...");
             Console.WriteLine($"Current smart TV status: {smartTVStatus}");
+            return IsSmartTVOn;
         }
     }
 }

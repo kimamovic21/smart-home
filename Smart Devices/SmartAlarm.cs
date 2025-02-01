@@ -19,23 +19,38 @@ namespace SmartHomeApp
 
         public override void TurnOn()
         {
-            IsSmartAlarmOn = true;
-            Console.WriteLine("\nTurning on the smart alarm...");
-            Console.WriteLine("Smart alarm is now ON!");
+            if (isSmartAlarmOn == true)
+            {
+                Console.WriteLine("Smart alarm is already ON!");
+            }
+            else
+            {
+                isSmartAlarmOn = true;
+                Console.WriteLine("Turning on the smart alarm...");
+                Console.WriteLine("Smart alarm is now ON!");
+            }
         }
 
         public override void TurnOff()
         {
-            IsSmartAlarmOn = false;
-            Console.WriteLine("\nTurning off the smart alarm...");
-            Console.WriteLine("Smart alarm is now OFF!");
+            if (IsSmartAlarmOn == true)
+            {
+                IsSmartAlarmOn = false;
+                Console.WriteLine("Turning off the smart alarm...");
+                Console.WriteLine("Smart alarm is now OFF!");
+            }
+            else
+            {
+                Console.WriteLine("Smart alarm is already OFF!");
+            }
         }
 
-        public override void GetStatus()
+        public override bool GetStatus()
         {
             string smartAlarmStatus = IsSmartAlarmOn ? "ON" : "OFF";
-            Console.WriteLine("\nChecking smart alarm status...");
+            Console.WriteLine("Checking smart alarm status...");
             Console.WriteLine($"Current smart alarm status: {smartAlarmStatus}");
+            return IsSmartAlarmOn;
         }
     }
 }
