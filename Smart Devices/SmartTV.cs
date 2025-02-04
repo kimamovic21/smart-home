@@ -29,7 +29,6 @@ namespace SmartHomeApp
             {
                 IsSmartTVOn = true;
                 ElectricityConsumption += RequiredElectricity;
-                Console.WriteLine("Turning on the smart TV...");
                 Console.WriteLine("Smart TV is now ON!");
             }
         }
@@ -44,7 +43,6 @@ namespace SmartHomeApp
             {
                 IsSmartTVOn = false;
                 ElectricityConsumption -= RequiredElectricity;
-                Console.WriteLine("Turning off the smart TV...");
                 Console.WriteLine("Smart TV is now OFF!");
             }
         }
@@ -52,7 +50,6 @@ namespace SmartHomeApp
         public override bool GetStatus()
         {
             string smartTVStatus = isSmartTVOn ? "ON" : "OFF";
-            Console.WriteLine("Checking smart TV status...");
             Console.WriteLine($"Current smart TV status: {smartTVStatus}");
             return IsSmartTVOn;
         }

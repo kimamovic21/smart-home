@@ -8,6 +8,8 @@ namespace SmartHomeApp
         private int requiredElectricity = 20;
         private bool isOn = false;
 
+        public int RequiredElectricity { get => requiredElectricity; }
+
         public int BrightnessLevel
         {
             get => brightness;

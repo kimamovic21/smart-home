@@ -6,7 +6,9 @@ namespace SmartHomeApp
     {
         private bool isLocked = true;
         private string pinCode = "1234";  
-        private int requiredElectricity = 10;  
+        private int requiredElectricity = 10;
+        public int RequiredElectricity { get => requiredElectricity; }
+
 
         public bool IsLocked { get => isLocked; }
         public string PinCode { get => pinCode; }

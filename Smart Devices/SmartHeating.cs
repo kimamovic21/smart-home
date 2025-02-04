@@ -7,10 +7,9 @@ namespace SmartHomeApp
         private bool isSmartHeatingOn = false;
         private int temperature = 20; //Default temperature
         private int requiredElectricity = 100;
-
+        public int RequiredElectricity { get => requiredElectricity; }
         public bool IsSmartHeatingOn { get => isSmartHeatingOn; set => isSmartHeatingOn = value; }
         public int Temperature { get => temperature; set => temperature = value; }
-        public int RequiredElectricity { get => requiredElectricity; }
 
         public SmartHeating()
         {
