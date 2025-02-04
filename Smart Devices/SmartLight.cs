@@ -4,7 +4,7 @@ namespace SmartHomeApp
 {
     internal class SmartLight : SmartHome
     {
-        private int brightness = 0;
+        private int brightness = 50;
         private int requiredElectricity = 20;
         private bool isOn = false;
 
@@ -33,7 +33,6 @@ namespace SmartHomeApp
             {
                 isOn = true;
                 ElectricityConsumption += requiredElectricity;
-                Console.WriteLine("Turning on the smart light...");
                 Console.WriteLine($"Smart light is now ON with {brightness}% brightness.");
             }
             else
@@ -48,7 +47,6 @@ namespace SmartHomeApp
             {
                 isOn = false;
                 ElectricityConsumption -= requiredElectricity;
-                Console.WriteLine("Turning off the smart light...");
                 Console.WriteLine("Smart light is now OFF.");
             }
             else

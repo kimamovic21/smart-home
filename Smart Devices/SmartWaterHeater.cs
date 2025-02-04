@@ -29,7 +29,6 @@ namespace SmartHomeApp
             {
                 IsSmartWaterHeaterOn = true;
                 ElectricityConsumption += RequiredElectricity;
-                Console.WriteLine("Turning on the smart water heater...");
                 Console.WriteLine("Smart water heater is now ON!");
                 this.GetStatus();
             }
@@ -45,7 +44,6 @@ namespace SmartHomeApp
             {
                 IsSmartWaterHeaterOn = false;
                 ElectricityConsumption -= RequiredElectricity;
-                Console.WriteLine("Turning off the smart water heater...");
                 Console.WriteLine("Smart water heater is now OFF!");
             }
             else
@@ -70,7 +68,6 @@ namespace SmartHomeApp
         public override bool GetStatus()
         {
             string smartWaterHeaterStatus = IsSmartWaterHeaterOn ? "ON" : "OFF";
-            Console.WriteLine("Checking smart water heater status...");
             Console.WriteLine($"Current smart water heater status: {smartWaterHeaterStatus}");
             Console.WriteLine($"Current temperature: {Temperature}°C");
             return IsSmartWaterHeaterOn;
