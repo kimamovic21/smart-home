@@ -8,14 +8,14 @@ namespace SmartHomeApp
         {
             SmartAlarm smartAlarm = new SmartAlarm();
             SmartTV smartTV = new SmartTV();
-            SmartHeating smartHeating = new SmartHeating();
+            SmartAirConditioner smartAirConditioner= new SmartAirConditioner();
             SmartDoorLock smartDoorLock = new SmartDoorLock();
             SmartLight smartLight = new SmartLight();
             SmartWaterHeater smartWaterHeater = new SmartWaterHeater();
 
             Console.WriteLine("Smart alarm id is: " + smartAlarm.SmartDeviceId);
             Console.WriteLine("Smart TV id is: " + smartTV.SmartDeviceId);
-            Console.WriteLine("Smart heating id is: " + smartHeating.SmartDeviceId);
+            Console.WriteLine("Smart air conditioner id is: " + smartAirConditioner.SmartDeviceId);
             Console.WriteLine("Smart door lock id is: " + smartDoorLock.SmartDeviceId);
             Console.WriteLine("Smart light id is: " + smartLight.SmartDeviceId);
             Console.WriteLine("Smart water heater id is: " + smartWaterHeater.SmartDeviceId);
@@ -25,7 +25,7 @@ namespace SmartHomeApp
                 int electricityConsumptionBySmartHome =
                     smartAlarm.GetElectricityConsumption() +
                     smartTV.GetElectricityConsumption() +
-                    smartHeating.GetElectricityConsumption() +
+                    smartAirConditioner.GetElectricityConsumption() +
                     smartDoorLock.GetElectricityConsumption() +
                     smartLight.GetElectricityConsumption() +
                     smartWaterHeater.GetElectricityConsumption();
@@ -34,7 +34,7 @@ namespace SmartHomeApp
                 Console.WriteLine("Choose an option");
                 Console.WriteLine("1. Change status of the smart alarm");
                 Console.WriteLine("2. Change status of the smart TV");
-                Console.WriteLine("3. Change status of the smart heating");
+                Console.WriteLine("3. Change status of the smart air conditioner");
                 Console.WriteLine("4. Change status of the smart door lock");
                 Console.WriteLine("5. Change status of the smart light");
                 Console.WriteLine("6. Change status of the smart water heater");
@@ -72,19 +72,19 @@ namespace SmartHomeApp
                 else if (userInput == "3")
                 {
                     Console.WriteLine("Choose an option");
-                    Console.WriteLine("1. Turn on the smart heating");
-                    Console.WriteLine("2. Turn off the smart heating");
-                    Console.WriteLine("3. Set the temperature of the smart heating");
-                    string? heatingInput = Console.ReadLine();
-                    if (heatingInput == "1") smartHeating.TurnOn();
-                    else if (heatingInput == "2") smartHeating.TurnOff();
-                    else if (heatingInput == "3")
+                    Console.WriteLine("1. Turn on the smart air conditioner");
+                    Console.WriteLine("2. Turn off the smart air conditioner");
+                    Console.WriteLine("3. Set the temperature of the smart air conditioner");
+                    string? airConditionerInput = Console.ReadLine();
+                    if (airConditionerInput == "1") smartAirConditioner.TurnOn();
+                    else if (airConditionerInput == "2") smartAirConditioner.TurnOff();
+                    else if (airConditionerInput == "3")
                     {
                         Console.WriteLine("Enter the desired temperature (0 - 30°C)");
                         string? temperatureInput = Console.ReadLine();
                         if (int.TryParse(temperatureInput, out int temperature))
                         {
-                            smartHeating.SetTemperature(temperature);
+                            smartAirConditioner.SetTemperature(temperature);
                         }
                         else Console.WriteLine("Invalid input");
                     }
