@@ -9,28 +9,31 @@ namespace SmartHomeApp
             SmartAlarm smartAlarm = new SmartAlarm();
             SmartTV smartTV = new SmartTV();
             SmartHeating smartHeating = new SmartHeating();
-            SmartDoorLock smartDoorLock = new SmartDoorLock(); 
+            SmartDoorLock smartDoorLock = new SmartDoorLock();
+            SmartLight smartLight = new SmartLight();
 
             Console.WriteLine("Smart alarm id is: " + smartAlarm.SmartDeviceId);
             Console.WriteLine("Smart TV id is: " + smartTV.SmartDeviceId);
             Console.WriteLine("Smart heating id is: " + smartHeating.SmartDeviceId);
             Console.WriteLine("Smart door lock id is: " + smartDoorLock.SmartDeviceId);
+            Console.WriteLine("Smart light id is: " + smartLight.SmartDeviceId);
 
             while (true)
             {
-                int electricityConsumptionBySmartHome = smartHeating.GetElectricityConsumption();
+                int electricityConsumptionBySmartHome = smartHeating.GetElectricityConsumption() + smartLight.GetElectricityConsumption();
                 Console.WriteLine("\nWelcome to the Smart Home App!");
                 Console.WriteLine("Choose an option");
-                Console.WriteLine("1. Change status of smart alarm");
+                Console.WriteLine("1. Change status of the smart alarm");
                 Console.WriteLine("2. Change status of the smart TV");
                 Console.WriteLine("3. Change status of the smart heating");
-                Console.WriteLine("4. Change status of the smart door lock"); 
-                Console.WriteLine("5. Exit");
+                Console.WriteLine("4. Change status of the smart door lock");
+                Console.WriteLine("5. Change status of the smart light");
+                Console.WriteLine("6. Exit");
                 Console.WriteLine("\nTotal electricity consumption is: " + electricityConsumptionBySmartHome + "kWh");
 
-                if (electricityConsumptionBySmartHome > 150)
+                if (electricityConsumptionBySmartHome > 400)
                 {
-                    Console.WriteLine("Warning! Electricity consumption is above 150kWh");
+                    Console.WriteLine("Warning! Electricity consumption is above 400kWh");
                 }
 
                 string? userInput = Console.ReadLine();
@@ -76,7 +79,7 @@ namespace SmartHomeApp
                     }
                     else Console.WriteLine("Invalid input");
                 }
-                else if (userInput == "4") 
+                else if (userInput == "4")
                 {
                     Console.WriteLine("Choose an option");
                     Console.WriteLine("1. Lock the door");
@@ -114,6 +117,41 @@ namespace SmartHomeApp
                     }
                 }
                 else if (userInput == "5")
+                {
+                    Console.WriteLine("Choose an option");
+                    Console.WriteLine("1. Turn on the smart light");
+                    Console.WriteLine("2. Turn off the smart light");
+                    Console.WriteLine("3. Set the brightness of the smart light");
+
+                    string? lightInput = Console.ReadLine();
+
+                    if (lightInput == "1")
+                    {
+                        smartLight.TurnOn();
+                    }
+                    else if (lightInput == "2")
+                    {
+                        smartLight.TurnOff();
+                    }
+                    else if (lightInput == "3")
+                    {
+                        Console.WriteLine("Enter the desired brightness (1-100):");
+                        string? brightnessInput = Console.ReadLine();
+                        if (int.TryParse(brightnessInput, out int brightness))
+                        {
+                            smartLight.BrightnessLevel = brightness;
+                        }
+                        else
+                        {
+                            Console.WriteLine("Invalid input");
+                        }
+                    }
+                    else
+                    {
+                        Console.WriteLine("Invalid input");
+                    }
+                }
+                else if (userInput == "6")
                 {
                     break;
                 }
