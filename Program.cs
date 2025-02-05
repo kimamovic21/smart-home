@@ -85,6 +85,7 @@ namespace SmartHomeApp
                         Console.WriteLine("\nChoose an option");
                         Console.WriteLine("1. Turn on the smart TV");
                         Console.WriteLine("2. Turn off the smart TV");
+                        Console.WriteLine("3. Change the TV channel");
                         string? tvInput = Console.ReadLine();
 
                         if (tvInput == "1")
@@ -94,6 +95,10 @@ namespace SmartHomeApp
                         else if (tvInput == "2")
                         {
                             smartTV.TurnOff();
+                        }
+                        else if (tvInput == "3")
+                        {
+                            smartTV.ChangeChannel();
                         }
                         else
                         {
