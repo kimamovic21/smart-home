@@ -5,7 +5,7 @@ namespace SmartHomeApp
     class SmartDoorLock : SmartHome
     {
         private bool isLocked = true;
-        private string pinCode = "1234";  
+        private string pinCode = "123456";  
         private int requiredElectricity = 10;
         public int RequiredElectricity { get => requiredElectricity; }
 
@@ -68,13 +68,21 @@ namespace SmartHomeApp
         {
             if (oldPin == pinCode)
             {
-                pinCode = newPin;
-                Console.WriteLine("PIN code has been changed successfully.");
+                if (string.IsNullOrWhiteSpace(newPin) || newPin.Length < 6 || newPin.Length > 15)
+                {
+                    Console.WriteLine("New PIN must be between 6 and 15 characters long and cannot be empty.");
+                }
+                else
+                {
+                    pinCode = newPin;
+                    Console.WriteLine("PIN code has been changed successfully.");
+                }
             }
             else
             {
                 Console.WriteLine("Incorrect old PIN! Unable to change PIN.");
             }
         }
+
     }
 }
