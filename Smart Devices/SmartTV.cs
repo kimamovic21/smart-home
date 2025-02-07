@@ -57,6 +57,7 @@ namespace SmartHomeApp
         {
             Console.ForegroundColor = IsSmartTVOn ? ConsoleColor.Green : ConsoleColor.Red;
             Console.WriteLine($"Current Smart TV status: {(IsSmartTVOn ? "ON" : "OFF")}");
+            Console.WriteLine($"Current channel: {(string.IsNullOrEmpty(currentChannel) ? "None" : currentChannel)}");
             Console.ResetColor();
             return IsSmartTVOn;
         }
