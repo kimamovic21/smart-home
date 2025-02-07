@@ -39,11 +39,16 @@ namespace SmartHomeApp
                 Console.WriteLine("5. Change status of the smart light");
                 Console.WriteLine("6. Change status of the smart water heater");
                 Console.WriteLine("7. Exit");
+
+                Console.ForegroundColor = ConsoleColor.Yellow;
                 Console.WriteLine("\nTotal electricity consumption is: " + electricityConsumptionBySmartHome + " kWh");
+                Console.ResetColor();
 
                 if (electricityConsumptionBySmartHome > 300)
                 {
+                    Console.ForegroundColor = ConsoleColor.Red;
                     Console.WriteLine("Warning! Electricity consumption is above 300 kWh");
+                    Console.ResetColor();
                 }
 
                 string? userInput = Console.ReadLine();
@@ -55,6 +60,8 @@ namespace SmartHomeApp
                         Console.WriteLine("\nChoose an option");
                         Console.WriteLine("1. Turn on the smart alarm");
                         Console.WriteLine("2. Turn off the smart alarm");
+                        Console.WriteLine("3. Check the smart alarm status");
+
                         string? alarmInput = Console.ReadLine();
 
                         if (alarmInput == "1")
@@ -65,9 +72,15 @@ namespace SmartHomeApp
                         {
                             smartAlarm.TurnOff();
                         }
+                        else if (alarmInput == "3")
+                        {
+                            smartAlarm.GetStatus();
+                        }
                         else
                         {
+                            Console.ForegroundColor = ConsoleColor.Red;
                             Console.WriteLine("Invalid input.");
+                            Console.ResetColor();
                         }
 
                         Console.WriteLine("\nReturn to the main menu? (y/n)");
@@ -78,6 +91,7 @@ namespace SmartHomeApp
                         }
                     }
                 }
+
                 else if (userInput == "2")
                 {
                     while (true)
@@ -86,6 +100,8 @@ namespace SmartHomeApp
                         Console.WriteLine("1. Turn on the smart TV");
                         Console.WriteLine("2. Turn off the smart TV");
                         Console.WriteLine("3. Change the TV channel");
+                        Console.WriteLine("4. Check the smart TV status");
+
                         string? tvInput = Console.ReadLine();
 
                         if (tvInput == "1")
@@ -100,9 +116,15 @@ namespace SmartHomeApp
                         {
                             smartTV.ChangeChannel();
                         }
+                        else if (tvInput == "4")
+                        {
+                            smartTV.GetStatus();
+                        }
                         else
                         {
+                            Console.ForegroundColor = ConsoleColor.Red;
                             Console.WriteLine("Invalid input.");
+                            Console.ResetColor();
                         }
 
                         Console.WriteLine("\nReturn to the main menu? (y/n)");
@@ -113,14 +135,16 @@ namespace SmartHomeApp
                         }
                     }
                 }
+
                 else if (userInput == "3")
                 {
                     while (true)
                     {
-                        Console.WriteLine("\nChoose an option");
+                        Console.WriteLine("\nChoose an option:");
                         Console.WriteLine("1. Turn on the smart air conditioner");
                         Console.WriteLine("2. Turn off the smart air conditioner");
                         Console.WriteLine("3. Set the temperature of the smart air conditioner");
+                        Console.WriteLine("4. Check the smart air conditioner status");
 
                         string? airConditionerInput = Console.ReadLine();
                         if (airConditionerInput == "1")
@@ -133,20 +157,37 @@ namespace SmartHomeApp
                         }
                         else if (airConditionerInput == "3")
                         {
-                            Console.WriteLine("Enter the desired temperature (0 - 30°C):");
-                            string? temperatureInput = Console.ReadLine();
-                            if (int.TryParse(temperatureInput, out int temperature) && temperature >= 0 && temperature <= 30)
+                            if (!smartAirConditioner.IsSmartAirConditionerOn)
                             {
-                                smartAirConditioner.SetTemperature(temperature);
+                                Console.ForegroundColor = ConsoleColor.Red;
+                                Console.WriteLine("The smart air conditioner is off. Please turn it on to set the temperature.");
+                                Console.ResetColor();
                             }
                             else
                             {
-                                Console.WriteLine("Invalid temperature. Please enter a number between 0 and 30.");
+                                Console.WriteLine("Enter the desired temperature (0 - 30°C):");
+                                string? temperatureInput = Console.ReadLine();
+                                if (int.TryParse(temperatureInput, out int temperature) && temperature >= 0 && temperature <= 30)
+                                {
+                                    smartAirConditioner.SetTemperature(temperature);
+                                }
+                                else
+                                {
+                                    Console.ForegroundColor = ConsoleColor.Red;
+                                    Console.WriteLine("Invalid temperature. Please enter a number between 0 and 30.");
+                                    Console.ResetColor();
+                                }
                             }
+                        }
+                        else if (airConditionerInput == "4")
+                        {
+                            smartAirConditioner.GetStatus();
                         }
                         else
                         {
+                            Console.ForegroundColor = ConsoleColor.Red;
                             Console.WriteLine("Invalid input.");
+                            Console.ResetColor();
                         }
 
                         Console.WriteLine("\nReturn to the main menu? (y/n)");
@@ -157,6 +198,7 @@ namespace SmartHomeApp
                         }
                     }
                 }
+
                 else if (userInput == "4")
                 {
                     while (true)
@@ -165,7 +207,7 @@ namespace SmartHomeApp
                         Console.WriteLine("1. Lock the door");
                         Console.WriteLine("2. Unlock the door");
                         Console.WriteLine("3. Change PIN code");
-                        Console.WriteLine("4. Check lock status");
+                        Console.WriteLine("4. Check the smart lock door status");
 
                         string? doorInput = Console.ReadLine();
 
@@ -193,7 +235,9 @@ namespace SmartHomeApp
                         }
                         else
                         {
+                            Console.ForegroundColor = ConsoleColor.Red;
                             Console.WriteLine("Invalid input.");
+                            Console.ResetColor();
                         }
 
                         Console.WriteLine("\nReturn to the main menu? (y/n)");
@@ -204,6 +248,7 @@ namespace SmartHomeApp
                         }
                     }
                 }
+
                 else if (userInput == "5")
                 {
                     while (true)
@@ -212,6 +257,7 @@ namespace SmartHomeApp
                         Console.WriteLine("1. Turn on the smart light");
                         Console.WriteLine("2. Turn off the smart light");
                         Console.WriteLine("3. Set the brightness of the smart light");
+                        Console.WriteLine("4. Check the smart light status");
 
                         string? lightInput = Console.ReadLine();
 
@@ -225,20 +271,37 @@ namespace SmartHomeApp
                         }
                         else if (lightInput == "3")
                         {
-                            Console.WriteLine("Enter the desired brightness (1-100):");
-                            string? brightnessInput = Console.ReadLine();
-                            if (int.TryParse(brightnessInput, out int brightness) && brightness >= 1 && brightness <= 100)
+                            if (!smartLight.IsSmartLightOn) 
                             {
-                                smartLight.BrightnessLevel = brightness;
+                                Console.ForegroundColor = ConsoleColor.Red;
+                                Console.WriteLine("The smart light is off. Please turn it on to set the brightness.");
+                                Console.ResetColor();
                             }
                             else
                             {
-                                Console.WriteLine("Invalid brightness value. Please enter a number between 1 and 100.");
+                                Console.WriteLine("Enter the desired brightness (1-100):");
+                                string? brightnessInput = Console.ReadLine();
+                                if (int.TryParse(brightnessInput, out int brightness) && brightness >= 1 && brightness <= 100)
+                                {
+                                    smartLight.BrightnessLevel = brightness; 
+                                }
+                                else
+                                {
+                                    Console.ForegroundColor = ConsoleColor.Red;
+                                    Console.WriteLine("Invalid brightness value. Please enter a number between 1 and 100.");
+                                    Console.ResetColor();
+                                }
                             }
+                        }
+                        else if (lightInput == "4")
+                        {
+                            smartLight.GetStatus();
                         }
                         else
                         {
+                            Console.ForegroundColor = ConsoleColor.Red;
                             Console.WriteLine("Invalid input.");
+                            Console.ResetColor();
                         }
 
                         Console.WriteLine("\nReturn to the main menu? (y/n)");
@@ -249,6 +312,7 @@ namespace SmartHomeApp
                         }
                     }
                 }
+
                 else if (userInput == "6")
                 {
                     while (true)
@@ -257,6 +321,7 @@ namespace SmartHomeApp
                         Console.WriteLine("1. Turn on the smart water heater");
                         Console.WriteLine("2. Turn off the smart water heater");
                         Console.WriteLine("3. Set the temperature of the smart water heater");
+                        Console.WriteLine("4. Check the smart water heater status");
 
                         string? waterHeaterInput = Console.ReadLine();
 
@@ -270,20 +335,37 @@ namespace SmartHomeApp
                         }
                         else if (waterHeaterInput == "3")
                         {
-                            Console.WriteLine("Enter the desired temperature (20-50°C):");
-                            string? temperatureInput = Console.ReadLine();
-                            if (int.TryParse(temperatureInput, out int temperature) && temperature >= 20 && temperature <= 50)
+                            if (!smartWaterHeater.IsSmartWaterHeaterOn)
                             {
-                                smartWaterHeater.SetTemperature(temperature);
+                                Console.ForegroundColor = ConsoleColor.Red;
+                                Console.WriteLine("The smart water heater is off. Please turn it on to set the temperature.");
+                                Console.ResetColor();
                             }
                             else
                             {
-                                Console.WriteLine("Invalid temperature. Please enter a number between 20 and 50.");
+                                Console.WriteLine("Enter the desired temperature (20-50°C):");
+                                string? temperatureInput = Console.ReadLine();
+                                if (int.TryParse(temperatureInput, out int temperature) && temperature >= 20 && temperature <= 50)
+                                {
+                                    smartWaterHeater.SetTemperature(temperature);
+                                }
+                                else
+                                {
+                                    Console.ForegroundColor = ConsoleColor.Red;
+                                    Console.WriteLine("Invalid temperature. Please enter a number between 20 and 50.");
+                                    Console.ResetColor();
+                                }
                             }
+                        }
+                        else if (waterHeaterInput == "4")
+                        {
+                            smartWaterHeater.GetStatus();
                         }
                         else
                         {
+                            Console.ForegroundColor = ConsoleColor.Red;
                             Console.WriteLine("Invalid input.");
+                            Console.ResetColor();
                         }
 
                         Console.WriteLine("\nReturn to the main menu? (y/n)");
@@ -294,13 +376,17 @@ namespace SmartHomeApp
                         }
                     }
                 }
+
+
                 else if (userInput == "7")
                 {
                     break;
                 }
                 else
                 {
-                    Console.WriteLine("Invalid input");
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine("Invalid input.");
+                    Console.ResetColor();
                 }
             }
         }

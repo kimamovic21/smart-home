@@ -1,65 +1,80 @@
-﻿using System;
-
-namespace SmartHomeApp
+﻿using SmartHomeApp;
+internal class SmartLight : SmartHome
 {
-    internal class SmartLight : SmartHome
+    private int brightness = 50;
+    private int requiredElectricity = 20;
+    private bool isSmartLightOn = false;
+
+    public int RequiredElectricity { get => requiredElectricity; }
+
+    public bool IsSmartLightOn
     {
-        private int brightness = 50;
-        private int requiredElectricity = 20;
-        private bool isOn = false;
+        get => isSmartLightOn;
+    }
 
-        public int RequiredElectricity { get => requiredElectricity; }
-
-        public int BrightnessLevel
+    public int BrightnessLevel
+    {
+        get => brightness;
+        set
         {
-            get => brightness;
-            set
+            if (value >= 1 && value <= 100)
             {
-                if (value >= 1 && value <= 100)
-                {
-                    brightness = value;
-                    Console.WriteLine($"Brightness set to {brightness}%.");
-                }
-                else
-                {
-                    Console.WriteLine("Brightness value must be between 1 and 100.");
-                }
-            }
-        }
-
-        public override void TurnOn()
-        {
-            if (!isOn)
-            {
-                isOn = true;
-                ElectricityConsumption += requiredElectricity;
-                Console.WriteLine($"Smart light is now ON with {brightness}% brightness.");
+                brightness = value;
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine($"Brightness set to {brightness}%.");
             }
             else
             {
-                Console.WriteLine("Smart light is already ON!");
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("Brightness value must be between 1 and 100.");
             }
+            Console.ResetColor();
         }
+    }
 
-        public override void TurnOff()
+    public override void TurnOn()
+    {
+        if (!isSmartLightOn)
         {
-            if (isOn)
-            {
-                isOn = false;
-                ElectricityConsumption -= requiredElectricity;
-                Console.WriteLine("Smart light is now OFF.");
-            }
-            else
-            {
-                Console.WriteLine("Smart light is already OFF!");
-            }
+            isSmartLightOn = true;
+            ElectricityConsumption += requiredElectricity;
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine($"Smart light is now ON with {brightness}% brightness.");
         }
+        else
+        {
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine("Smart light is already ON!");
+        }
+        Console.ResetColor();
+    }
 
-        public override bool GetStatus()
+    public override void TurnOff()
+    {
+        if (isSmartLightOn)
         {
-            string lightStatus = isOn ? "ON" : "OFF";
-            Console.WriteLine($"Smart light status: {lightStatus} with {brightness}% brightness.");
-            return isOn;
+            isSmartLightOn = false;
+            ElectricityConsumption -= requiredElectricity;
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("Smart light is now OFF.");
         }
+        else
+        {
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("Smart light is already OFF!");
+        }
+        Console.ResetColor();
+    }
+
+    public override bool GetStatus()
+    {
+        string lightStatus = isSmartLightOn ? "ON" : "OFF";
+
+        Console.ForegroundColor = isSmartLightOn ? ConsoleColor.Green : ConsoleColor.Red;
+        Console.WriteLine($"Smart light status: {lightStatus} with {brightness}% brightness.");
+
+        Console.ResetColor();
+
+        return isSmartLightOn;
     }
 }
