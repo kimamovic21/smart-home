@@ -79,10 +79,11 @@ namespace SmartHomeApp
         {
             while (true)
             {
-                Console.WriteLine("\nChoose an option");
+                Console.WriteLine("\nChoose an option:");
                 Console.WriteLine("1. Turn on the smart alarm");
                 Console.WriteLine("2. Turn off the smart alarm");
-                Console.WriteLine("3. Check the smart alarm status");
+                Console.WriteLine("3. Set the smart alarm decibel level");
+                Console.WriteLine("4. Check the smart alarm status");
 
                 string? alarmInput = Console.ReadLine();
 
@@ -95,6 +96,29 @@ namespace SmartHomeApp
                     smartAlarm.TurnOff();
                 }
                 else if (alarmInput == "3")
+                {
+                    if (!smartAlarm.IsSmartAlarmOn)
+                    {
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.WriteLine("The smart alarm is off. Please turn it on to set the decibel level.");
+                        Console.ResetColor();
+                    }
+                    else
+                    {
+                        Console.Write("Enter decibel level (80-120): ");
+                        if (int.TryParse(Console.ReadLine(), out int decibelLevel))
+                        {
+                            smartAlarm.SetDecibelLevel(decibelLevel);
+                        }
+                        else
+                        {
+                            Console.ForegroundColor = ConsoleColor.Red;
+                            Console.WriteLine("Invalid input. Please enter a valid number.");
+                            Console.ResetColor();
+                        }
+                    }
+                }
+                else if (alarmInput == "4")
                 {
                     smartAlarm.GetStatus();
                 }
