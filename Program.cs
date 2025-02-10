@@ -215,16 +215,16 @@ namespace SmartHomeApp
                     }
                     else
                     {
-                        Console.WriteLine("Enter the desired temperature (0 - 30°C):");
+                        Console.WriteLine("Enter the desired temperature (10 - 30°C):");
                         string? temperatureInput = Console.ReadLine();
-                        if (int.TryParse(temperatureInput, out int temperature) && temperature >= 0 && temperature <= 30)
+                        if (int.TryParse(temperatureInput, out int temperature) && temperature >= 10 && temperature <= 30)
                         {
                             smartAirConditioner.SetTemperature(temperature);
                         }
                         else
                         {
                             Console.ForegroundColor = ConsoleColor.Red;
-                            Console.WriteLine("Invalid temperature. Please enter a number between 0 and 30.");
+                            Console.WriteLine("Invalid temperature. Please enter a number between 10 and 30.");
                             Console.ResetColor();
                         }
                     }

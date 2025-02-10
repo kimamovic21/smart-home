@@ -65,10 +65,10 @@ namespace SmartHomeApp
                 return;
             }
 
-            if (newTemperature < 0 || newTemperature > 30)
+            if (newTemperature < 10 || newTemperature > 30)
             {
                 Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("Invalid temperature! Please set a value between 0°C and 30°C.");
+                Console.WriteLine("Invalid temperature! Please set a value between 10°C and 30°C.");
             }
             else
             {
