@@ -13,7 +13,8 @@ namespace SmartHomeApp
                     new SmartAirConditioner(),
                     new SmartDoorLock(),
                     new SmartLight(),
-                    new SmartWaterHeater()
+                    new SmartWaterHeater(),
+                    new SmartSurveillanceCameras()
                 };
 
             foreach (var device in smartDevices)
@@ -37,7 +38,8 @@ namespace SmartHomeApp
                 Console.WriteLine("4. Change status of the smart door lock");
                 Console.WriteLine("5. Change status of the smart light");
                 Console.WriteLine("6. Change status of the smart water heater");
-                Console.WriteLine("7. Exit");
+                Console.WriteLine("7. Change status of the smart surveillance cameras");
+                Console.WriteLine("8. Exit");
 
                 Console.ForegroundColor = ConsoleColor.Yellow;
                 Console.WriteLine("\nTotal electricity consumption is: " + electricityConsumptionBySmartHome + " kWh");
@@ -65,6 +67,8 @@ namespace SmartHomeApp
                 else if (userInput == "6")
                     HandleSmartWaterHeater((SmartWaterHeater)smartDevices[5]);
                 else if (userInput == "7")
+                    HandleSmartSurveillanceCameras((SmartSurveillanceCameras)smartDevices[6]);
+                else if (userInput == "8")
                     break;
                 else
                 {
@@ -424,6 +428,90 @@ namespace SmartHomeApp
                 else if (waterHeaterInput == "4")
                 {
                     smartWaterHeater.GetStatus();
+                }
+                else
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine("Invalid input.");
+                    Console.ResetColor();
+                }
+
+                Console.WriteLine("\nReturn to the main menu? (y/n)");
+                string? returnToMainMenu = Console.ReadLine();
+                if (returnToMainMenu?.ToLower() == "y")
+                {
+                    break;
+                }
+            }
+        }
+
+        static void HandleSmartSurveillanceCameras(SmartSurveillanceCameras smartCameras)
+        {
+            while (true)
+            {
+                Console.WriteLine("\nChoose an option:");
+                Console.WriteLine("1. Turn on surveillance cameras");
+                Console.WriteLine("2. Turn off surveillance cameras");
+                Console.WriteLine("3. Set camera resolution");
+                Console.WriteLine("4. Check surveillance cameras status");
+
+                string? cameraInput = Console.ReadLine();
+
+                if (cameraInput == "1")
+                {
+                    smartCameras.TurnOn();
+                }
+                else if (cameraInput == "2")
+                {
+                    smartCameras.TurnOff();
+                }
+                else if (cameraInput == "3")
+                {
+                    if (!smartCameras.IsCamerasOn)
+                    {
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.WriteLine("The smart surveillance cameras are off. Please turn them on to set the camera resolution.");
+                        Console.ResetColor();
+                        continue;
+                    }
+
+                    Console.ForegroundColor = ConsoleColor.Yellow;
+                    Console.WriteLine("Choose camera resolution:");
+                    Console.WriteLine("1. Low");
+                    Console.WriteLine("2. Medium");
+                    Console.WriteLine("3. High");
+                    Console.ResetColor();
+
+                    if (int.TryParse(Console.ReadLine(), out int resolutionChoice))
+                    {
+                        switch (resolutionChoice)
+                        {
+                            case 1:
+                                smartCameras.SetCameraResolution(SmartSurveillanceCameras.CameraResolution.Low);
+                                break;
+                            case 2:
+                                smartCameras.SetCameraResolution(SmartSurveillanceCameras.CameraResolution.Medium);
+                                break;
+                            case 3:
+                                smartCameras.SetCameraResolution(SmartSurveillanceCameras.CameraResolution.High);
+                                break;
+                            default:
+                                Console.ForegroundColor = ConsoleColor.Red;
+                                Console.WriteLine("Invalid input. Please choose a valid camera resolution.");
+                                Console.ResetColor();
+                                break;
+                        }
+                    }
+                    else
+                    {
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.WriteLine("Invalid input. Please enter a number.");
+                        Console.ResetColor();
+                    }
+                }
+                else if (cameraInput == "4")
+                {
+                    smartCameras.GetStatus();
                 }
                 else
                 {
