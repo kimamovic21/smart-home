@@ -6,7 +6,7 @@ namespace SmartHomeApp
     {
         private bool isCamerasOn = false;
         private const int requiredElectricity = 50;
-        private CameraResolution resolution = CameraResolution.Medium; 
+        private CameraResolution resolution = CameraResolution.Medium;
 
         public enum CameraResolution
         {
@@ -67,20 +67,53 @@ namespace SmartHomeApp
             return isCamerasOn;
         }
 
-        public void SetCameraResolution(CameraResolution newResolution)
+        public void SetCameraResolution()
         {
             if (!isCamerasOn)
             {
                 Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("The smart surveillance cameras are off. Please turn them on to set the camera resolution.");
+                Console.WriteLine("The smart surveillance cameras are OFF. Please turn them ON to set the camera resolution.");
                 Console.ResetColor();
                 return;
             }
 
-            resolution = newResolution;
-            Console.ForegroundColor = ConsoleColor.Green;
-            Console.WriteLine($"Camera resolution set to {resolution}");
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.WriteLine("Choose camera resolution:");
+            Console.WriteLine("1. Low");
+            Console.WriteLine("2. Medium");
+            Console.WriteLine("3. High");
             Console.ResetColor();
+
+            if (int.TryParse(Console.ReadLine(), out int resolutionChoice))
+            {
+                switch (resolutionChoice)
+                {
+                    case 1:
+                        resolution = CameraResolution.Low;
+                        break;
+                    case 2:
+                        resolution = CameraResolution.Medium;
+                        break;
+                    case 3:
+                        resolution = CameraResolution.High;
+                        break;
+                    default:
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.WriteLine("Invalid input. Please choose a valid camera resolution.");
+                        Console.ResetColor();
+                        return;
+                }
+
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine($"Camera resolution set to {resolution}");
+                Console.ResetColor();
+            }
+            else
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("Invalid input. Please enter a number.");
+                Console.ResetColor();
+            }
         }
     }
 }

@@ -52,26 +52,35 @@ namespace SmartHomeApp
             Console.ResetColor();
         }
 
-        public void SetDecibelLevel(int smartAlarmDecibelLevel)
+        public void SetDecibelLevel()
         {
             if (!isSmartAlarmOn)
             {
                 Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("The smart alarm is off. Please turn it on to set the temperature.");
+                Console.WriteLine("The smart alarm is OFF. Please turn it on to set the decibel level. ");
                 Console.ResetColor();
                 return;
             }
 
-            if (smartAlarmDecibelLevel < 80 || smartAlarmDecibelLevel > 120)
+            Console.Write("Enter decibel level (80-120): ");
+            if (int.TryParse(Console.ReadLine(), out int smartAlarmDecibelLevel))
             {
-                Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("Invalid input. Please enter a decibel level between 80 and 120.");
+                if (smartAlarmDecibelLevel < 80 || smartAlarmDecibelLevel > 120)
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine("Invalid input. Please enter a decibel level between 80 and 120.");
+                }
+                else
+                {
+                    decibelLevel = smartAlarmDecibelLevel;
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    Console.WriteLine($"Smart alarm decibel level set to {decibelLevel} dB.");
+                }
             }
             else
             {
-                decibelLevel = smartAlarmDecibelLevel;
-                Console.ForegroundColor = ConsoleColor.Green;
-                Console.WriteLine($"Smart alarm decibel level set to {decibelLevel} dB.");
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("Invalid input. Please enter a valid number.");
             }
 
             Console.ResetColor();

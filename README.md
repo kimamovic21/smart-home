@@ -4,13 +4,15 @@
 
 
 ## 📌 Project Overview  
-- The **Smart Home** project is a console-based application that simulates the behavior of various smart home devices. 
-- Users can interact with these devices, turning them on/off, adjusting settings, and retrieving status updates.
+- The **Smart Home** project is a console-based application that simulates the behavior of various smart home devices.
+- Users can interact with these devices using console menu options.
 
 ## 🔥 Features  
-✅ Turn smart devices on/off
-✅ Manage settings for each smart device  
-✅ Retrieve device statuses  
+✅ Turn smart devices on/off  <br>  
+✅ Manage settings for each smart device  <br>  
+✅ Retrieve device statuses  <br> 
+✅ Calculate electricity consumption when devices are turned on
+
 
 
 ## 🏗️ Class Overview  
@@ -18,6 +20,7 @@
 ### **SmartHome (Base Class)**
 - Abstract class for all smart home devices  
 - Defines core functionalities for turning devices on/off and retrieving status updates
+- Implements electricity consumption tracking
 
 ### **Smart Air Conditioner**
 - Controls a smart air conditioning system  
@@ -60,6 +63,7 @@
 - Features:  
   - Turn on/off smart TV  
   - Change smart TV channels (5 channels)
+  - Set smart TV volume level (0 - 100)
   - Display smart TV status  
 
 ### **Smart Water Heater**

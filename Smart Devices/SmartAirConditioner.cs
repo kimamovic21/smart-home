@@ -5,7 +5,7 @@ namespace SmartHomeApp
     internal class SmartAirConditioner : SmartHome
     {
         private bool isSmartAirConditionerOn = false;
-        private int temperature = 20; // Default temperature
+        private int temperature = 20;
         private int requiredElectricity = 100;
 
         public int RequiredElectricity { get => requiredElectricity; }
@@ -28,7 +28,6 @@ namespace SmartHomeApp
                 ElectricityConsumption += RequiredElectricity;
                 Console.ForegroundColor = ConsoleColor.Green;
                 Console.WriteLine("Smart air conditioner is now ON!");
-                GetStatus();
             }
             else
             {
@@ -55,26 +54,36 @@ namespace SmartHomeApp
             Console.ResetColor();
         }
 
-        public void SetTemperature(int newTemperature)
+        public void SetTemperature()
         {
             if (!IsSmartAirConditionerOn)
             {
                 Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("The smart air conditioner is off. Please turn it on to set the temperature.");
+                Console.WriteLine("The smart air conditioner is OFF. Please turn it ON to set the temperature.");
                 Console.ResetColor();
                 return;
             }
 
-            if (newTemperature < 10 || newTemperature > 30)
+            Console.Write("Enter the desired temperature (between 10°C and 30°C): ");
+            string? input = Console.ReadLine();
+            if (int.TryParse(input, out int newTemperature))
             {
-                Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("Invalid temperature! Please set a value between 10°C and 30°C.");
+                if (newTemperature < 10 || newTemperature > 30)
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine("Invalid temperature! Please set a value between 10°C and 30°C.");
+                }
+                else
+                {
+                    Temperature = newTemperature;
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    Console.WriteLine($"Setting smart air conditioner temperature to {Temperature}°C...");
+                }
             }
             else
             {
-                Temperature = newTemperature;
-                Console.ForegroundColor = ConsoleColor.Green;
-                Console.WriteLine($"Setting smart air conditioner temperature to {Temperature}°C...");
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("Invalid input! Please enter a valid temperature.");
             }
             Console.ResetColor();
         }

@@ -5,7 +5,7 @@ namespace SmartHomeApp
     internal class SmartWaterHeater : SmartHome
     {
         private bool isSmartWaterHeaterOn = false;
-        private int temperature = 30; // Default temperature
+        private int temperature = 30;
         private int requiredElectricity = 100;
 
         public int RequiredElectricity { get => requiredElectricity; }
@@ -28,7 +28,6 @@ namespace SmartHomeApp
                 ElectricityConsumption += RequiredElectricity;
                 Console.ForegroundColor = ConsoleColor.Green;
                 Console.WriteLine("Smart water heater is now ON!");
-                GetStatus();
             }
             else
             {
@@ -55,25 +54,27 @@ namespace SmartHomeApp
             Console.ResetColor();
         }
 
-        public void SetTemperature(int newTemperature)
+        public void SetTemperature()
         {
             if (!IsSmartWaterHeaterOn)
             {
                 Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("The smart water heater is off. Please turn it on to set the temperature.");
+                Console.WriteLine("The smart water heater is OFF. Please turn it on to set the temperature.");
             }
             else
             {
-                if (newTemperature < 20 || newTemperature > 50)
-                {
-                    Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine("Invalid temperature! Please set a value between 20°C and 50°C.");
-                }
-                else
+                Console.WriteLine("Enter the desired temperature (20-50°C):");
+                string? temperatureInput = Console.ReadLine();
+                if (int.TryParse(temperatureInput, out int newTemperature) && newTemperature >= 20 && newTemperature <= 50)
                 {
                     Temperature = newTemperature;
                     Console.ForegroundColor = ConsoleColor.Green;
-                    Console.WriteLine($"Setting smart water heater temperature to {Temperature}°C...");
+                    Console.WriteLine($"Smart water heater temperature set to {Temperature}°C.");
+                }
+                else
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine("Invalid temperature! Please set a value between 20°C and 50°C.");
                 }
             }
             Console.ResetColor();

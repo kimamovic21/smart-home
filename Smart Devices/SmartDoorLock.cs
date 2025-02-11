@@ -6,11 +6,10 @@ namespace SmartHomeApp
     {
         private bool isLocked = true;
         private string pinCode = "123456";
-        private int requiredElectricity = 10;
-        public int RequiredElectricity { get => requiredElectricity; }
-
-        public bool IsLocked { get => isLocked; }
-        public string PinCode { get => pinCode; }
+        private const int requiredElectricity = 10;
+        public int RequiredElectricity => requiredElectricity;
+        public bool IsLocked => isLocked;
+        public string PinCode => pinCode;
 
         public override void TurnOn()
         {
@@ -28,15 +27,11 @@ namespace SmartHomeApp
 
         public override bool GetStatus()
         {
-            string lockStatus = isLocked ? "locked" : "unlocked";
             Console.ForegroundColor = isLocked ? ConsoleColor.Red : ConsoleColor.Green;
-
-            Console.WriteLine($"The door is currently {lockStatus}.");
+            Console.WriteLine($"The door is currently {(isLocked ? "locked" : "unlocked")}.");
             Console.ResetColor();
-
             return isLocked;
         }
-
 
         public void LockDoor()
         {
@@ -55,8 +50,11 @@ namespace SmartHomeApp
             Console.ResetColor();
         }
 
-        public void UnlockDoor(string enteredPin)
+        public void UnlockDoor()
         {
+            Console.Write("Enter PIN to unlock: ");
+            string? enteredPin = Console.ReadLine();
+
             if (enteredPin == pinCode)
             {
                 if (isLocked)
@@ -79,8 +77,13 @@ namespace SmartHomeApp
             Console.ResetColor();
         }
 
-        public void ChangePinCode(string oldPin, string newPin)
+        public void ChangePinCode()
         {
+            Console.Write("Enter old PIN: ");
+            string? oldPin = Console.ReadLine();
+            Console.Write("Enter new PIN: ");
+            string? newPin = Console.ReadLine();
+
             if (oldPin == pinCode)
             {
                 if (string.IsNullOrWhiteSpace(newPin) || newPin.Length < 6 || newPin.Length > 15)
